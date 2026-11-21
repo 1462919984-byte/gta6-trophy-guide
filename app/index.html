@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palmetto Six-Star — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">★</span>
+    <h1>Palmetto Six-Star</h1>
+    <span class="brand-sub">GTA VI trophy guide &amp; tracker · offline</span>
+  </div>
+  <div class="head-stats" id="headStats">Loading…</div>
+  <div class="head-actions">
+    <label class="spoiler-toggle" title="Hide story trophy names &amp; descriptions until earned">
+      <input type="checkbox" id="spoilerToggle" checked>
+      <span>🛡 Spoiler shield</span>
+    </label>
+    <button id="exportBtn" type="button" class="btn">Export</button>
+    <label class="btn import-btn">Import<input id="importInput" type="file" accept="application/json"></label>
+    <span class="saved-note" id="savedNote">Saved in this browser</span>
+  </div>
+</header>
+
+<div class="audit-strip" id="auditStrip">…</div>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="tracker" class="active">Tracker</button>
+  <button data-tab="roadmap">Roadmap</button>
+  <button data-tab="missables">Missables</button>
+  <button data-tab="sources">Sources</button>
+</nav>
+
+<main id="trackerView" class="view tracker-view">
+  <aside class="col-left">
+    <div class="filters" id="filters">
+      <input type="search" id="search" placeholder="Search trophies…">
+      <div class="filter-chips" id="filterChips"></div>
+      <div class="grade-row" id="gradeRow"></div>
+    </div>
+    <div class="checklist" id="checklist"></div>
+  </aside>
+
+  <section class="col-center" id="detail"></section>
+
+  <aside class="col-right">
+    <div class="rail nextup" id="nextUp"></div>
+    <div class="rail sources-rail" id="guideSources"></div>
+  </aside>
+</main>
+
+<main id="roadmapView" class="view" hidden></main>
+<main id="missablesView" class="view" hidden></main>
+<main id="sourcesView" class="view" hidden></main>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

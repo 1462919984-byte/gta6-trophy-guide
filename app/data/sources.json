@@ -1,0 +1,77 @@
+{
+  "readDate": "2026-11-21",
+  "sources": [
+    {
+      "id": 1,
+      "name": "PowerPyx",
+      "url": "https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/",
+      "pagesRead": "1 (trophy guide & roadmap, full)",
+      "claimsCited": 96,
+      "readDate": "2026-11-21",
+      "note": "Most-cited source. Difficulty 4/10, ~200h, 1 playthrough, 0 online, 1 possible missable (Positive Mental Attitude)."
+    },
+    {
+      "id": 2,
+      "name": "GTADB",
+      "url": "https://gtadb.net/articles/gta-6-trophies-platinum-guide/?show_secrets=1",
+      "pagesRead": "1 (trophy guide & roadmap, full)",
+      "claimsCited": 21,
+      "readDate": "2026-11-21",
+      "note": "Cross-checked 55-entry list; 1P/2G/6S/46B, 28 secret, unresolved Chapter 1 meditation question."
+    },
+    {
+      "id": 3,
+      "name": "GameMapa",
+      "url": "https://gamemapa.com/en/gta-6/guides/gta-6-trophy-achievement-list/",
+      "pagesRead": "1 (full list, roadmap, missables)",
+      "claimsCited": 64,
+      "readDate": "2026-11-21",
+      "note": "Full list with Gamerscore, per-trophy counts (42 ranges, 18 meditations, 14 drone locations, 52 areas, 9 gangs, 8 garages), 5 unsolved hidden trophies."
+    },
+    {
+      "id": 4,
+      "name": "eGamers",
+      "url": "https://egamers.io/gta-6-trophy-list-all-55-trophies-and-achievements-plus-the-hardest-ones/",
+      "pagesRead": "1 (full list + hard trophies + 100% checklist comparison)",
+      "claimsCited": 47,
+      "readDate": "2026-11-21",
+      "note": "Hidden/non-hidden breakdown (27 visible + 28 hidden), 100%-checklist vs trophy targets, disputed 15-vs-18 meditations."
+    },
+    {
+      "id": 5,
+      "name": "GTA Scoop",
+      "url": "https://gtascoop.com/guides/gta-6-trophies-achievements/",
+      "pagesRead": "1 (full list, at-a-glance, don't-miss, tips)",
+      "claimsCited": 31,
+      "readDate": "2026-11-21",
+      "note": "1P/2G/6S/46B, only possible missable is Positive Mental Attitude, ~200h, cheats disable trophies."
+    },
+    {
+      "id": 6,
+      "name": "One More Game",
+      "url": "https://onemoregame.ph/2026/11/grand-theft-auto-vi-trophy-list/",
+      "pagesRead": "1 (full list, PS5 with PSN progress targets)",
+      "claimsCited": 18,
+      "readDate": "2026-11-21",
+      "note": "Wrongly counts 1P/3G/14S/18B and lists The Shootist as Bronze — a documented dispute, not followed."
+    },
+    {
+      "id": 7,
+      "name": "Exophase",
+      "url": "https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/",
+      "pagesRead": "1 (PSN trophy list; 28 secret flags verified)",
+      "claimsCited": 55,
+      "readDate": "2026-11-21",
+      "note": "Official name/description/grade list + hidden flags. 55 items: 28 secret, 27 visible."
+    },
+    {
+      "id": 8,
+      "name": "PSNProfiles",
+      "url": "https://psnprofiles.com/trophies/43531-grand-theft-auto-vi",
+      "pagesRead": "1 (list page; count targets cross-checked via One More Game render)",
+      "claimsCited": 14,
+      "readDate": "2026-11-21",
+      "note": "PSN progress targets (counts) and grade cross-check; direct page render blocked by Cloudflare, counts verified via the list agree."
+    }
+  ]
+}
