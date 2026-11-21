@@ -2169,5 +2169,125 @@
    "count": 0,
    "countTarget": 10
   }
+ ],
+ "plannerTemplates": [
+  {
+   "stage": 1,
+   "title": "Chapters 1–2 open + the balcony meditation",
+   "steps": [
+    {
+     "text": "Play the opening mission Gone Fishing and reach Chapter 1.",
+     "minutes": 25
+    },
+    {
+     "text": "Finish Chapter 1 (through Down to Earth) and set up the balcony scene.",
+     "minutes": 35
+    },
+    {
+     "text": "The morning after Down to Earth, accept Lucia’s balcony meditation (Positive Mental Attitude).",
+     "minutes": 10
+    },
+    {
+     "text": "Complete Breakfast Run and the Chapter 2 close-out mission What’s in the Bag?.",
+     "minutes": 40
+    },
+    {
+     "text": "Do Cal fishing, Billy, Kenton and Stick Fiddler side strands while they are open.",
+     "minutes": 50
+    }
+   ]
+  },
+  {
+   "stage": 2,
+   "title": "Chapters 3–5 heists and side strands",
+   "steps": [
+    {
+     "text": "Finish Chapter 3’s The Cartel Heist and Welcome to Vice City.",
+     "minutes": 60
+    },
+    {
+     "text": "Complete the Kenton return and The Lone Rider window (Coffee Break).",
+     "minutes": 30
+    },
+    {
+     "text": "Run Andy, Randy and Tyrone strands plus the bank vaults and armored trucks.",
+     "minutes": 90
+    },
+    {
+     "text": "Close the story through Starting From Zero.",
+     "minutes": 75
+    }
+   ]
+  },
+  {
+   "stage": 3,
+   "title": "Activities, races and shooting",
+   "steps": [
+    {
+     "text": "Earn gold in all 42 Shooting Range challenges (The Shootist).",
+     "minutes": 150
+    },
+    {
+     "text": "Win a Top Fun drone race at all 14 locations.",
+     "minutes": 90
+    },
+    {
+     "text": "Win 20 unique races (Earn Cash, Not Kudos).",
+     "minutes": 120
+    },
+    {
+     "text": "Try all 9 activity types once (Master of None).",
+     "minutes": 60
+    },
+    {
+     "text": "Gunslinger, Hot Together and Personal Best clean-up.",
+     "minutes": 80
+    }
+   ]
+  },
+  {
+   "stage": 4,
+   "title": "Collectibles and counts",
+   "steps": [
+    {
+     "text": "Complete any 250 of 397 stunts (Cunning Stunts).",
+     "minutes": 180
+    },
+    {
+     "text": "WAiNK-scan 100 locations and collect 3 card sets.",
+     "minutes": 120
+    },
+    {
+     "text": "Discover 100 vehicles and explore all 52 map areas.",
+     "minutes": 150
+    },
+    {
+     "text": "Buy all 8 garages and register 10 vehicles (On the Spot).",
+     "minutes": 40
+    },
+    {
+     "text": "Rob one operation from each of the 9 gangs (Pest Control).",
+     "minutes": 90
+    }
+   ]
+  },
+  {
+   "stage": 5,
+   "title": "Clean-up and 100% completion",
+   "steps": [
+    {
+     "text": "Complete 8 Strangers & Freaks quest strands.",
+     "minutes": 120
+    },
+    {
+     "text": "Finish the 100% checklist (about 60% of true completion).",
+     "minutes": 200
+    },
+    {
+     "text": "Mop up any remaining trophies, then the platinum unlocks.",
+     "minutes": 60
+    }
+   ]
+  }
  ]
 }

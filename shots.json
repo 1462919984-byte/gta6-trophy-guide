@@ -2,5 +2,7 @@
   { "file": "1-cover-tracker-pma.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
   { "file": "2-roadmap.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
   { "file": "3-missables.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "4-sources.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } }
+  { "file": "4-sources.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
+  { "file": "5-planner.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
+  { "file": "6-next-up.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } }
 ]

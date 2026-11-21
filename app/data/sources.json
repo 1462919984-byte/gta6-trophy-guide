@@ -73,5 +73,14 @@
       "readDate": "2026-11-21",
       "note": "PSN progress targets (counts) and grade cross-check; direct page render blocked by Cloudflare, counts verified via the list agree."
     }
-  ]
+  ],
+  "methodology": {
+    "title": "How this guide was built",
+    "body": "Every trophy keeps its official PlayStation name, description and grade verbatim. The guide text and numbered steps are our own words, written from the cited public references read on 21 Nov 2026.",
+    "notes": [
+      "Each step tags the specific source it draws from with a bracketed [n] that maps to the table below.",
+      "Where sources disagree, we show both versions in a “SOURCES DIFFER” box and add an explicit “Our call” line rather than silently picking one.",
+      "Unconfirmed claims are never presented as fact; the only genuinely missable window is the Chapter 1 balcony meditation."
+    ]
+  }
 }

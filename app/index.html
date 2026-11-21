@@ -20,7 +20,8 @@
       <input type="checkbox" id="spoilerToggle" checked>
       <span>🛡 Spoiler shield</span>
     </label>
-    <button id="exportBtn" type="button" class="btn">Export</button>
+    <button id="exportBtn" type="button" class="btn">Export JSON</button>
+    <button id="csvBtn" type="button" class="btn">Export CSV</button>
     <label class="btn import-btn">Import<input id="importInput" type="file" accept="application/json"></label>
     <span class="saved-note" id="savedNote">Saved in this browser</span>
   </div>
@@ -28,10 +29,16 @@
 
 <div class="audit-strip" id="auditStrip">…</div>
 
+<div class="progress-zone">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <span class="progress-text" id="progressText">Loading…</span>
+</div>
+
 <nav class="tabs" id="tabs">
   <button data-tab="tracker" class="active">Tracker</button>
   <button data-tab="roadmap">Roadmap</button>
   <button data-tab="missables">Missables</button>
+  <button data-tab="planner">Session planner</button>
   <button data-tab="sources">Sources</button>
 </nav>
 
@@ -55,6 +62,7 @@
 
 <main id="roadmapView" class="view" hidden></main>
 <main id="missablesView" class="view" hidden></main>
+<main id="plannerView" class="view" hidden></main>
 <main id="sourcesView" class="view" hidden></main>
 
 <script type="module" src="app.js"></script>

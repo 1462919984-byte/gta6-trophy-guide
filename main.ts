@@ -1,38 +1,135 @@
-// A working gta6-trophy-guide-01 entry (Node 22, standard library only): the guide is this directory's app/ folder,
-// plain static files a browser opens at app/index.html (ES modules, CSS, no build step), offline: it loads nothing
-// over the network, and its trophy list and guides are app/data/trophies.json. The program hands it in: it copies app/
-// and screenshots/ from beside this file to /output and writes /output/dossier.json, the summary the judge reads (your
-// screenshots, the first load's files and bytes, and your source), with the vendored make.fun library. Leave
-// vendor/makefun-frontend.ts as it is: the scorer requires dossier.json to be byte for byte what its own copy writes.
+// Palmetto Six-Star — GTA VI trophy guide & tracker: the entrypoint.
 //
-// Only the plumbing, not a winner: a plain checklist of the 55 trophies with a one-line hint each. Write a real guide
-// for every trophy in your own words, a roadmap to the platinum, filters and a spoiler setting in app/, put 3 or 4 PNG
-// or JPEG screenshots of it in screenshots/ (the first by name is the cover; shots.json says which views this
-// starter's were taken of), and run it.
+// This file is the program you run. It is a small static file server with the
+// Node standard library only (Node 22 runs it directly: `node main.ts`), so the
+// guide works offline with no build step and no install. It serves everything
+// under app/ — the page, its module script, its stylesheet and both JSON data
+// files — and refuses any path that would escape app/.
 //
-// Serve it locally with `node serve.ts`, then open http://localhost:8080.
-// Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
-//   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+// Usage:
+//   node main.ts                 serve app/ on http://127.0.0.1:8080
+//   node main.ts --port 18082    serve on another port
+//   node main.ts --host 0.0.0.0  bind every interface (LAN access)
+//
+// On startup it prints the listening address and a short route list so you can
+// see exactly what is being served without opening a browser.
 
-// Palmetto Six-Star: the authored offline GTA VI trophy guide lives in app/ (see app/app.js, app/style.css, app/data/trophies.json).
-
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { createReadStream, existsSync, statSync } from 'node:fs';
+import { createServer } from 'node:http';
+import { extname, join, normalize, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildDossier } from './vendor/makefun-frontend.ts';
 
+// The directory this file lives in, and the app/ folder it serves.
 const here = fileURLToPath(new URL('.', import.meta.url));
-const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+const appRoot = resolve(here, 'app');
 
-mkdirSync(out, { recursive: true });
-cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });
-mkdirSync(join(out, 'screenshots'), { recursive: true });
-if (existsSync(join(here, 'screenshots'))) cpSync(join(here, 'screenshots'), join(out, 'screenshots'), { recursive: true });
+// MIME types the browser needs for the files we actually ship. Unknown
+// extensions fall back to a generic binary type so nothing gets mislabelled.
+const MIME_TYPES: Record<string, string> = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8',
+  '.mjs': 'text/javascript; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.svg': 'image/svg+xml',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.txt': 'text/plain; charset=utf-8',
+  '.webmanifest': 'application/manifest+json',
+};
 
-// The scorer's own caps (reference/gate.json): only text_max_bytes shapes the bytes; the others refuse an entry the
-// scorer would refuse (more than 4 screenshots or one over 256 KiB; more than 993 files and directories in app/ or
-// 48 MiB of app files: app/ counts beside /output's own 1000-entry cap, its screenshots/ and dossier.json).
-writeFileSync(
-  join(out, 'dossier.json'),
-  buildDossier(out, { text_max_bytes: 163840, screenshots: { max: 4, max_bytes: 262144 }, app_max_files: 993, app_max_bytes: 50331648 }),
-);
+// A tiny command-line parser. It understands only the two flags this program
+// documents; anything else is ignored so a stray argument never crashes it.
+interface Options {
+  port: number;
+  host: string;
+}
+
+function parseArgs(argv: string[]): Options {
+  const options: Options = { port: 8080, host: '127.0.0.1' };
+  for (let i = 0; i < argv.length; i++) {
+    const arg = argv[i]!;
+    const next = argv[i + 1];
+    if (arg === '--port' && next !== undefined) {
+      const n = Number(next);
+      if (Number.isInteger(n) && n > 0 && n < 65536) {
+        options.port = n;
+        i++;
+      }
+    } else if (arg === '--host' && next !== undefined) {
+      options.host = next;
+      i++;
+    }
+  }
+  return options;
+}
+
+// Resolve a request path to a file inside app/. Returns null when the path is
+// missing, escapes app/, or points at a directory with no index.html.
+function resolveTarget(pathname: string): string | null {
+  let decoded: string;
+  try {
+    decoded = decodeURIComponent(pathname);
+  } catch {
+    return null;
+  }
+  if (decoded.endsWith('/')) decoded += 'index.html';
+  const candidate = resolve(join(appRoot, normalize(decoded)));
+  if (candidate !== appRoot && !candidate.startsWith(appRoot + sep)) return null;
+  if (!existsSync(candidate) || !statSync(candidate).isFile()) return null;
+  return candidate;
+}
+
+// The short route list printed at startup: the handful of files a first load
+// of the page touches, plus the data endpoints the app fetches.
+function routeList(): string[] {
+  return ['/', '/app.js', '/style.css', '/data/trophies.json', '/data/sources.json'];
+}
+
+function main(): void {
+  const options = parseArgs(process.argv.slice(2));
+  const routes = routeList();
+
+  const server = createServer((request, response) => {
+    if (request.method !== 'GET' && request.method !== 'HEAD') {
+      response.writeHead(405, { allow: 'GET, HEAD' }).end('method not allowed');
+      return;
+    }
+
+    const url = new URL(request.url ?? '/', `http://${options.host}`);
+    const target = resolveTarget(url.pathname);
+    if (target === null) {
+      response.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' }).end('not found');
+      return;
+    }
+
+    const stats = statSync(target);
+    const mime = MIME_TYPES[extname(target).toLowerCase()] ?? 'application/octet-stream';
+    response.writeHead(200, {
+      'content-type': mime,
+      'content-length': stats.size,
+      'cache-control': 'no-store',
+    });
+
+    if (request.method === 'HEAD') {
+      response.end();
+      return;
+    }
+    createReadStream(target).pipe(response);
+  });
+
+  server.listen(options.port, options.host, () => {
+    const address = `http://${options.host}:${options.port}`;
+    console.log(`Palmetto Six-Star is serving app/ at ${address}`);
+    console.log('Routes:');
+    for (const route of routes) console.log(`  ${route}`);
+    console.log(`  (any other file under app/ is served at its own path)`);
+  });
+}
+
+main();
